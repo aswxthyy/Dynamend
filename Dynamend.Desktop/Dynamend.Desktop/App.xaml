@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="Buttons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="TextBox.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="RadioButton.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Fonts.xaml" />
+                <ResourceDictionary Source="ListStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
