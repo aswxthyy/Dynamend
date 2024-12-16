@@ -7,11 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Background="#272727">
+        <StackPanel Background="#272727" Grid.Column="1">
             <Button Style="{StaticResource ButtonBase}" >Click Me</Button>
             <TextBox Style="{StaticResource TxtBox}"></TextBox>
             <RadioButton Style="{StaticResource Rbutton}">Sample</RadioButton>
+        </StackPanel>
 
         <StackPanel Background="#302923">
             <TextBlock Text="Dynamend" FontSize="{StaticResource FontXl}"/>
