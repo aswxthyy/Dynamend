@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+
+        <StackPanel Background="#272727">
+            <Button Style="{StaticResource ButtonBase}" >Click Me</Button>
+            <TextBox Style="{StaticResource TxtBox}"></TextBox>
+            <RadioButton Style="{StaticResource Rbutton}">Sample</RadioButton>
+
         <StackPanel Background="#302923">
             <TextBlock Text="Dynamend" FontSize="{StaticResource FontXl}"/>
             <Label Style="{StaticResource H1}" Content="Sample Label"/>
