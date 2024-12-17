@@ -20,9 +20,13 @@ namespace Dynamend.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Frame  MainFrameInstances { get; private set; }
         public MainWindow()
         {
             InitializeComponent();
+            MainFrameInstances = MainFrame;
+            MainFrame.Navigate(new Pages.PreviousReportPage());
         }
+       
     }
 }

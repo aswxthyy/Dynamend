@@ -3,11 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Dynamend.Desktop.Pages"
+      xmlns:local="clr-namespace:Dynamend.Desktop.Pages" 
+      xmlns:Vm="clr-namespace:Dynamend.Desktop.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Background="#272727"
       Title="PreviousReportPage">
-
+    <Page.DataContext>
+        <Vm:PreviousReportPageViewModel></Vm:PreviousReportPageViewModel>
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -45,7 +48,7 @@
                 </ListView>
         </StackPanel>
         <StackPanel Grid.Row="3" HorizontalAlignment="Center">
-            <Button Content="New" Style="{StaticResource ButtonBase}" x:Name="BtnNewReport"></Button>
+            <Button Click="BtnNewReport_Click" Content="New" Style="{StaticResource ButtonBase}" x:Name="BtnNewReport"></Button>
         </StackPanel>
     </Grid>
 </Page>
