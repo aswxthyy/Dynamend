@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="ListStyle" TargetType="ListView">
+        <Setter Property="Foreground" Value="#31511e"/>
+        <Setter Property="Background" Value="#f6fcdf"/>
+        <Setter Property="FontFamily" Value="Cascadia Mono"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSm}"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+</ResourceDictionary>
