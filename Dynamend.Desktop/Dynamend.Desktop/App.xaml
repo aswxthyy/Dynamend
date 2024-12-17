@@ -6,11 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ButtonStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="TextBoxStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="RBStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Fonts.xaml" />
-                <ResourceDictionary Source="ListStyle.xaml"/>
+                <ResourceDictionary Source="Resources/ButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/TextBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/RBStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/Fonts.xaml" />
+                <ResourceDictionary Source="Resources/ListStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
