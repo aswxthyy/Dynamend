@@ -43,8 +43,6 @@ namespace Dynamend.Desktop.Controls
             DependencyProperty.Register("Value", typeof(string), typeof(ReportStatus), new PropertyMetadata(""));
 
 
-
-
         public ReportStatus()
         {
             InitializeComponent();

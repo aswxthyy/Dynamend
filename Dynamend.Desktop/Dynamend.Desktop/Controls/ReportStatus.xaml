@@ -7,85 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" d:Background="Black">
     <StackPanel Orientation="Vertical">
-    <StackPanel Orientation="Horizontal">
-        <TextBlock Text="{Binding Text}" d:Text="ENGINE" Style="{StaticResource H3}" Margin="10"></TextBlock>
-        <RadioButton Style="{StaticResource Rbutton}" Tag="Passed" Click="RadioButton_Click">Passed</RadioButton>
-        <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired" Click="RadioButton_Click">Repaired</RadioButton>
-        <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced" Click="RadioButton_Click">Replaced</RadioButton>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Text}" Style="{StaticResource H3}" Margin="10"></TextBlock>
+            <RadioButton Style="{StaticResource Rbutton}" Content="Passed" Tag="Passed" Click="RadioButton_Click"></RadioButton>
+            <RadioButton Style="{StaticResource Rbutton}" Content="Repaired" Tag="Repaired" Click="RadioButton_Click"></RadioButton>
+            <RadioButton Style="{StaticResource Rbutton}" Content="Replaced"  Tag="Replaced" Click="RadioButton_Click"></RadioButton>
+        </StackPanel>
     </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="SHIFT" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="CLUTCH AND BRAKE" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="STEERING" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="GRILLE,TRIM AND ROOF RACK" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="DOORS,HOOD,DECKLID,TAILGATE" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="BODY PANELS AND BUMPERS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="GLASS AND OUTSIDE MIRRORS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="EXTERIOR LIGHTS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="AIRBAG AND SAFETY BELTS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="AUDIO AND ALARM SYSTEMS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="HEAT/VENT/AC/DEFOG/DEFROST" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="INTERIOR AMENITIES" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Passed">Passed</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Repaired">Repaired</RadioButton>
-            <RadioButton Style="{StaticResource Rbutton}" Tag="Replaced">Replaced</RadioButton>
-        </StackPanel>
 
-    </StackPanel>
-   
 </UserControl>
