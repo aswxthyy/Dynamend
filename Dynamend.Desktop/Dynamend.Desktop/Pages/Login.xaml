@@ -5,11 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Dynamend.Desktop.Pages"
       xmlns:styles="clr-namespace:Dynamend.Desktop"
+      xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Login">
-    
-    <Grid  Background="#302923">
+    <!--<Page.Resources>
+        <ImageBrush x:Key="BackgroundBrush" ImageSource="../Images/car.jpg"/>
+    </Page.Resources>-->
+
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <vm:LoginViewModel/>
+    </Page.DataContext>
+    <!--<Grid Background="{StaticResource BackgroundBrush}">-->
+    <Grid Background="#302923">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -23,21 +46,24 @@
         <StackPanel Grid.Column="0">
             <Label Content ="Dynamend" Style="{StaticResource H1}"
                    Margin="10,10,0,0"/>
-            <TextBlock Text="one stop solution." Style="{StaticResource H3}"
+            <TextBlock Text="one stop pitstop." Style="{StaticResource H3}"
                        Margin="15,0,0,0"
                        Foreground="#859f3d"
                        FontWeight="Normal"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Margin="40,30,40,0" HorizontalAlignment="Center">
             <TextBlock Text="Name" HorizontalAlignment="Left" Style="{StaticResource H3}" Margin="0,0,0,5"/>
-            <TextBox Style="{StaticResource TxtBox}" Margin="0,0,0,30" HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TxtBox}" Margin="0,0,0,30" HorizontalAlignment="Left"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
             
             <TextBlock Text="License Number" HorizontalAlignment="Left" Style="{StaticResource H3}" Margin="0,0,0,5"/>
-            <TextBox Style="{StaticResource TxtBox}" Margin="0" HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TxtBox}" Margin="0" HorizontalAlignment="Left"
+                     Text="{Binding License, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <Button Content="LOGIN" Style="{StaticResource ButtonBase}" Margin="10,30,10,20"/>
+            <Button Content="LOGIN" Style="{StaticResource ButtonBase}" Margin="10,30,10,20"
+                    />
             <TextBlock Text="New Customer?" Style="{StaticResource H3}" HorizontalAlignment="Center" TextDecorations="Underline"/>
         </StackPanel>
     </Grid>
