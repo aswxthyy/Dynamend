@@ -1,0 +1,44 @@
+﻿<Page x:Class="Dynamend.Desktop.Pages.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dynamend.Desktop.Pages"
+      xmlns:styles="clr-namespace:Dynamend.Desktop"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Login">
+    
+    <Grid  Background="#302923">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label Content ="Dynamend" Style="{StaticResource H1}"
+                   Margin="10,10,0,0"/>
+            <TextBlock Text="one stop solution." Style="{StaticResource H3}"
+                       Margin="15,0,0,0"
+                       Foreground="#859f3d"
+                       FontWeight="Normal"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+            <TextBlock Text="Name" HorizontalAlignment="Left" Style="{StaticResource H3}" Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource TxtBox}" Margin="0,0,0,30" HorizontalAlignment="Left"/>
+            
+            <TextBlock Text="License Number" HorizontalAlignment="Left" Style="{StaticResource H3}" Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource TxtBox}" Margin="0" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Button Content="LOGIN" Style="{StaticResource ButtonBase}" Margin="10,30,10,20"/>
+            <TextBlock Text="New Customer?" Style="{StaticResource H3}" HorizontalAlignment="Center" TextDecorations="Underline"/>
+        </StackPanel>
+    </Grid>
+</Page>
