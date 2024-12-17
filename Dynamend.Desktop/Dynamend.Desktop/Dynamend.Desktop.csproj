@@ -67,6 +67,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\PreviousReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NewCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\NewReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +104,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\PreviousReportPage.xaml.cs">
+      <DependentUpon>PreviousReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewCustomer.xaml.cs">
+      <DependentUpon>NewCustomer.xaml</DependentUpon>
+  </Compile>
     <Compile Include="Pages\NewReport.xaml.cs">
       <DependentUpon>NewReport.xaml</DependentUpon>
     </Compile>
