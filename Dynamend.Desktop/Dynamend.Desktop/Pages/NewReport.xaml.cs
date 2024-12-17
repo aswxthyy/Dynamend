@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dynamend.Desktop.Commands;
 
 namespace Dynamend.Desktop.Pages
 {
@@ -23,6 +26,12 @@ namespace Dynamend.Desktop.Pages
         public NewReport()
         {
             InitializeComponent();
+           
+        }
+       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Report Generated");
         }
     }
 }

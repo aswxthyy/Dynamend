@@ -3,10 +3,29 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Dynamend.Desktop.Pages"
+      xmlns:local="clr-namespace:Dynamend.Desktop.Pages" 
+      xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels"
+      xmlns:controls="clr-namespace:Dynamend.Desktop.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="NewReport">
+    <Page.DataContext>
+        <vm:NewReportViewModel/>
+    </Page.DataContext>
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"></TextBlock>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="#272727">
         <Grid.RowDefinitions>
@@ -18,13 +37,19 @@
             <Label Style="{StaticResource H1}" Content="NEW REPORT" HorizontalContentAlignment="Center" Margin="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Style="{StaticResource H2}" Text="Name:" Margin="10"></TextBlock>
-                <TextBlock Style="{StaticResource H3}" Text="Binding Name" Margin="18" Width="150"/>
+                <TextBlock Style="{StaticResource H3}" Text="{Binding Name }" Margin="18" Width="150"/>
                 <TextBlock Style="{StaticResource H2}" Text="License No:" Margin="10"></TextBlock>
-                <TextBlock Style="{StaticResource H3}" Text="Binding License No " Margin="18" Width="150"/>
+                <TextBlock Style="{StaticResource H3}" Text="{Binding License}" Margin="18" Width="150"/>
                 <TextBlock Style="{StaticResource H2}" Text="Model:" Margin="10"></TextBlock>
-                <TextBlock Style="{StaticResource H3}" Text="Binding Model" Margin="18" Width="150"/>
+                <TextBlock Style="{StaticResource H3}" Text="{Binding Model}" Margin="18" Width="150"/>
                 <TextBlock Style="{StaticResource H2}" Text="Kms:" Margin="10"></TextBlock>
-                <TextBox Style="{StaticResource TxtBox}" Text="Binding Kms" Margin="18" Width="150"/>
+               
+                <StackPanel Orientation="Vertical">
+                    <TextBox Style="{StaticResource TxtBox}"
+          Text="{Binding Kms,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+          Margin="18,18,18,0" Width="150"/>
+                    <TextBlock Text="{Binding KmsError,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" Margin="18,0,18,18"></TextBlock>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" >
@@ -35,85 +60,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="ENGINE" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="SHIFT" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="CLUTCH AND BRAKE" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="STEERING" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="GRILLE,TRIM AND ROOF RACK" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="DOORS,HOOD,DECKLID,TAILGATE" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="BODY PANELS AND BUMPERS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="GLASS AND OUTSIDE MIRRORS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="EXTERIOR LIGHTS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="AIRBAG AND SAFETY BELTS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="AUDIO AND ALARM SYSTEMS" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="HEAT/VENT/AC/DEFOG/DEFROST" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="INTERIOR AMENITIES" Style="{StaticResource H3}" Margin="10"></TextBlock>
-                        <RadioButton Style="{StaticResource Rbutton}">Passed</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Repaired</RadioButton>
-                        <RadioButton Style="{StaticResource Rbutton}">Replaced</RadioButton>
-                    </StackPanel>
-                </StackPanel>
+                    <controls:ReportStatus Text="ENGINE" Value=""></controls:ReportStatus>
+                    
+                   
+                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
                         <TextBlock Style="{StaticResource H2}" Margin="10">CUSTOM REPAIRS</TextBlock>
@@ -130,16 +80,16 @@
                 <StackPanel Grid.Column="2">
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Style="{StaticResource H3}" Margin="10" Width="50">Cost:</TextBlock>
-                        <TextBlock Text="6000" Margin="10" Style="{StaticResource H3}" Width="50"></TextBlock>
+                        <TextBlock Text="{Binding Cost}"  Margin="10" Style="{StaticResource H3}" Width="50"></TextBlock>
                     </StackPanel>
                 </StackPanel>
                 <DockPanel Dock="Bottom" Margin="10,350,10,10" Grid.Column="2">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource H3}" Margin="15" Width="90">Total Cost:</TextBlock>
-                            <TextBlock Text="12000" Margin="15" Style="{StaticResource H3}" Width="50"></TextBlock>
+                            <TextBlock Text="{Binding TotalCost}"  Margin="15" Style="{StaticResource H3}" Width="50"></TextBlock>
                         </StackPanel>
-                        <Button Style="{StaticResource ButtonBase}" HorizontalAlignment="Left">OK</Button>
+                        <Button Style="{StaticResource ButtonBase}" HorizontalAlignment="Left" Click="Button_Click" Command="{Binding Command}">OK</Button>
                     </StackPanel>
                 </DockPanel>
             </Grid>
