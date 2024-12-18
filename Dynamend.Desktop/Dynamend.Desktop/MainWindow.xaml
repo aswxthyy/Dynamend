@@ -3,10 +3,108 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Dynamend.Desktop"
+        xmlns:local="clr-namespace:Dynamend.Desktop" 
+        xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <vm:LoginViewModel/>
+    </Window.DataContext>
+    <!--<Grid Background="{StaticResource BackgroundBrush}">-->
+    <Grid Background="#302923">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label Content ="Dynamend" Style="{StaticResource H1}"
+                Margin="10,10,0,0"/>
+            <TextBlock Text="one stop pitstop." Style="{StaticResource H3}"
+                    Margin="15,0,0,0"
+                    Foreground="#859f3d"
+                    FontWeight="Normal"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="10,10,30,10">
+            <StackPanel  Orientation="Horizontal" Margin="0" VerticalAlignment="Top">
+                <TextBlock Text="Name" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="20"
+                       Style="{StaticResource H3}"/>
+                <TextBox Style="{StaticResource TxtBox}" Margin="0" Width="150"
+                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+
+                <TextBlock Text="License Number" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="20"
+                       Style="{StaticResource H3}"/>
+                <TextBox Style="{StaticResource TxtBox}" Margin="0" Width="150" 
+                  Text="{Binding License, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                <Button Content="SEARCH" Style="{StaticResource ButtonBase}"
+                        HorizontalAlignment="Right"
+                        Margin="10"/>
+                <TextBlock Text="New Customer?" Style="{StaticResource H3}"
+                         HorizontalAlignment="Right" TextDecorations="Underline"
+                           Margin="0,0,10,0"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Image Source="Images\R.png"
+                   Margin="10,0,0,0"
+                   />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,10,30,10">
+            <DataGrid 
+                CanUserAddRows="False"
+                CanUserResizeColumns="True"
+                AutoGenerateColumns="True"
+                FontFamily="Cascadia Mono"
+                Foreground="#859f3d"
+                FontSize="{Binding FontMd}"
+                Margin="10"
+                SelectedItem="{Binding SelectedItem}"
+                ItemsSource="{Binding Users}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Width="200"
+                         Header="Customer" 
+                         Binding="{Binding Name}"></DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        Header="License Number"
+                        Width="200"
+                        Binding="{Binding License}"></DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        Header="Model"
+                        Width="130"
+                        Binding="{Binding Model}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Window>
