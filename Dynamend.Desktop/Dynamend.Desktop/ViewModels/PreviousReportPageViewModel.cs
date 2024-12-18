@@ -8,19 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Dynamend.Desktop.Models;
 using Dynamend.Desktop.Pages;
+using Dynamend.Desktop.Repositories;
 
 namespace Dynamend.Desktop.ViewModels
 {
     internal class PreviousReportPageViewModel : INotifyPropertyChanged
     {
+        private readonly Repository _repository;
+        private readonly List<ServiceReport> _reports;
         public PreviousReportPageViewModel()
         {
-            ServiceReports = new ObservableCollection<ServiceReport>();
+            ServiceReportsToDisplay = new ObservableCollection<ServiceReport>();
+            _repository = new Repository();
         }
-
-      
-      
-        public ObservableCollection<ServiceReport> ServiceReports { get; set; }
+        
+        public ObservableCollection<ServiceReport> ServiceReportsToDisplay { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

@@ -10,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Dynamend.Desktop.Windows;
 
-namespace Dynamend.Desktop
+namespace Dynamend.Desktop.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for NewCustomer.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NewCustomer : Window
     {
-        public static Frame  MainFrameInstances { get; private set; }
-        public MainWindow()
+        public NewCustomer()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new NewCustomer().ShowDialog();
-        }
-
-
     }
 }

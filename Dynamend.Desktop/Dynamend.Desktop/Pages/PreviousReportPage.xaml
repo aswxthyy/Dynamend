@@ -39,7 +39,7 @@
             <TextBlock Text="Previous Service Report" Style="{StaticResource H2}" HorizontalAlignment="Center"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <ListView Style="{StaticResource ListStyle}" Margin="10" HorizontalAlignment="Center" x:Name="LstViewPreviousReport">
+            <ListView Style="{StaticResource ListStyle}" Margin="10" HorizontalAlignment="Center" x:Name="LstViewPreviousReport" ItemsSource="{Binding ServiceReportsToDisplay}">
                     <ListView.View>
                         <GridView>
                             

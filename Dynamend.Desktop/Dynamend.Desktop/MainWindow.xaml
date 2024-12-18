@@ -6,7 +6,45 @@
         xmlns:local="clr-namespace:Dynamend.Desktop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Frame x:Name="MainFrame"></Frame>
-    </Grid>
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Options">
+                <MenuItem Header="Search"></MenuItem>
+                <MenuItem Header="Add User"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Button Click="Button_Click">New Customer</Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBox Width="500"></TextBox>
+            <Button>Search</Button>
+        </StackPanel>
+
+        <DataGrid AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Vehicle Number"></DataGridTextColumn>
+                <DataGridTextColumn Header="Customer Name"></DataGridTextColumn>
+                <DataGridTextColumn Header="Vehicle Model"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label>Custom content</Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<ListView>
+     <ListView.View>
+         <GridView>
+             <GridView.Columns>
+                 <GridViewColumn Header="Vehicle Number"></GridViewColumn>
+                 <GridViewColumn Header="Username"></GridViewColumn>
+                 <GridViewColumn Header="Model Name"></GridViewColumn>
+                 <GridViewColumn></GridViewColumn>
+             </GridView.Columns>
+         </GridView>
+     </ListView.View>
+ </ListView>-->
+
+    </StackPanel>
 </Window>
