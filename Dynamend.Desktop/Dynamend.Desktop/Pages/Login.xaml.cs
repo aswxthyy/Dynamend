@@ -24,5 +24,11 @@ namespace Dynamend.Desktop.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_LoginClick(object sender, RoutedEventArgs e)
+        {
+            var p = (NavigationWindow)this.Parent;
+            p.Navigate(new Pages.PreviousReportPage());
+        }
     }
 }
