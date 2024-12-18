@@ -59,6 +59,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\CustomCommand.cs" />
+    <Compile Include="Controls\ReportStatus.xaml.cs">
+      <DependentUpon>ReportStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\NewReportViewModel.cs" />
+    <Page Include="Controls\ReportStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NewCustomerViewModel.cs" />
