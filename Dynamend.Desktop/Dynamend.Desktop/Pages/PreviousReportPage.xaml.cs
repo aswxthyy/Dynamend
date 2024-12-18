@@ -28,7 +28,7 @@ namespace Dynamend.Desktop.Pages
         private void BtnNewReport_Click(object sender, RoutedEventArgs e)
         {
             var p = (NavigationWindow)this.Parent;
-            p.Navigate( new Pages.NewCustomer() );
+            p.Navigate(new Pages.NewReport());
         }
     }
 }

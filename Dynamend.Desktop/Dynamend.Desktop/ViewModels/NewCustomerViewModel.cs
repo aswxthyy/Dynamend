@@ -8,6 +8,7 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Dynamend.Desktop.ViewModels
 {
     internal class NewCustomerViewModel : INotifyPropertyChanged, INotifyDataErrorInfo

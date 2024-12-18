@@ -24,7 +24,8 @@ namespace Dynamend.Desktop
         public MainWindow()
         {
             InitializeComponent();
-          
+            MainFrameInstances = MainFrame;
+            MainFrame.Navigate(new Pages.Login());
         }
        
     }
