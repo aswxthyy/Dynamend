@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using Dynamend.Desktop.Commands;
 
 namespace Dynamend.Desktop.ViewModels
@@ -17,27 +19,45 @@ namespace Dynamend.Desktop.ViewModels
         public NewReportViewModel()
         {
 
-            Command = new CustomCommand(execute, canExecute);
+            Command = new CustomCommand(ClearAll,CanClearAll);
         }
-            private bool canExecute()
-            {
-                return true;
-            }
 
-            private void execute()
-            {
-                Kms = string.Empty;
-            }
+        private void ClearAll()
+        {
+            Kms = string.Empty;
+            //selectedOption = null;
+           
+        }
 
-            private string _name;
-            private string _license;
-            private string _model;
-            private string _kms;
-            private double _cost;
-            private double _totalCost;
-            private string _KmsError;
+        private bool CanClearAll()
+        {
+            return !string.IsNullOrEmpty(Kms);
+        }
 
-            public string Name
+        
+
+        private string _name;
+        private string _license;
+        private string _model;
+        private string _kms;
+        private double _cost;
+        private double _totalCost;
+        private string _KmsError;
+        private string engine;
+        private string shift;
+        private string clutch;
+        private string steering;
+        private string grille;
+        private string doors;
+        private string bodypanels;
+        private string glass;
+        private string exterior;
+        private string airbag;
+        private string audio;
+        private string vent;
+        private string interior;
+       
+        public string Name
             {
                 get => _name;
                 set
@@ -91,14 +111,132 @@ namespace Dynamend.Desktop.ViewModels
                     _kms = value;
                     OnPropertyChanged(nameof(Kms));
                     OnPropertyChanged(nameof(KmsError));
-                }
+                ((CustomCommand)Command).RaiseCanExecuteChanged();
             }
-            public string KmsError
+            }
+      
+        public string KmsError
             {
                 get => this[nameof(Kms)];
             }
-
-            public CustomCommand Command { get; set; }
+        public string Engine
+        {
+            get => engine;
+            set
+            {
+                engine = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Shift
+        {
+            get => shift;
+            set
+            {
+                shift = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Clutch
+        {
+            get => clutch;
+            set
+            {
+                clutch = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Steering
+        {
+            get => steering;
+            set
+            {
+                steering = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Grille
+        {
+            get => grille;
+            set
+            {
+                grille = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Doors
+        {
+            get => doors;
+            set
+            {
+                doors = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Bodypanels
+        {
+            get => bodypanels;
+            set
+            {
+                bodypanels = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Glass
+        {
+            get => glass;
+            set
+            {
+                glass = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Exterior
+        {
+            get => exterior;
+            set
+            {
+                exterior = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Airbag
+        {
+            get => airbag;
+            set
+            {
+                airbag = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Audio
+        {
+            get => audio;
+            set
+            {
+                audio = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Vent
+        {
+            get => vent;
+            set
+            {
+                vent = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Interior
+        {
+            get => interior;
+            set
+            {
+                interior = value;
+                OnPropertyChanged();
+            }
+        }
+        public CustomCommand Command { get; set; }
             public string this[string columnName]
             {
                 get

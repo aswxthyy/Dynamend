@@ -41,6 +41,7 @@ namespace Dynamend.Desktop.Controls
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(string), typeof(ReportStatus), new PropertyMetadata(""));
+        
 
 
         public ReportStatus()
@@ -54,7 +55,7 @@ namespace Dynamend.Desktop.Controls
             var radioBtn = sender as RadioButton;
             var tag = radioBtn.Tag as string;
             Value = tag;
-            MessageBox.Show(Value);
+           
         }
     }
 }
