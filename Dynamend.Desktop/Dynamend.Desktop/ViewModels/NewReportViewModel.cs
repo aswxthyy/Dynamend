@@ -15,8 +15,9 @@ using Dynamend.Desktop.Repositories;
 
 namespace Dynamend.Desktop.ViewModels
 {
-    internal class NewReportViewModel : INotifyPropertyChanged, IDataErrorInfo
+    internal class NewReportViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+        private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
         private readonly Repository _repository;
         public RelayCommands SavenewReportCommand { get; set; }
         private string _selectedLicense;
@@ -45,8 +46,6 @@ namespace Dynamend.Desktop.ViewModels
         }
         public NewReportViewModel(string selectedLicense)
         {
-
-            Command = new CustomCommand(ClearAll, CanClearAll);
             _repository = new Repository();
             SavenewReportCommand = new RelayCommands(SaveNewReport);
             SelectedLicense = selectedLicense;
@@ -94,7 +93,7 @@ namespace Dynamend.Desktop.ViewModels
 
             if (SelectedLicense != null)
             {
-                MessageBox.Show("");
+                
                 SearchResultCustomer = _repository.GetCustomerByLicense(SelectedLicense);
                 ResultCustomerName = SearchResultCustomer.Name;
                 ResultCustomerLicense = SearchResultCustomer.LicenseNumber;
@@ -103,11 +102,11 @@ namespace Dynamend.Desktop.ViewModels
         }
         private void SaveNewReport()
         {
-            //if (HasErrors)
-            //{
-            //    MessageBox.Show("Please fix the validation errors", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
+            if (HasErrors)
+            {
+                MessageBox.Show("Please fix the validation errors", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             var newReport = new ServiceReport
             {
                 CustomerName = ResultCustomerName,
@@ -125,34 +124,23 @@ namespace Dynamend.Desktop.ViewModels
                 AudioAndAlarmsSystems = Audio,
                 HeatAndVentAndACDeFogAndDeposit = vent,
                 InteriorAmenities = Interior,
-                TotalCost = Cost
+                TotalCost = TotalCost,
+                Kms = Kms,
 
             };
             _repository.AddServiceReport(newReport);
             MessageBox.Show("Service Report Added Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void ClearAll()
-        {
-            Kms = string.Empty;
-            //selectedOption = null;
+      
 
-        }
-
-        private bool CanClearAll()
-        {
-            return !string.IsNullOrEmpty(Kms);
-        }
-
-
-
+      
         private string _name;
         private string _license;
         private string _model;
         private string _kms;
         private double _cost;
         private double _totalCost;
-        private string _KmsError;
         private string engine;
         private string shift;
         private string clutch;
@@ -219,16 +207,12 @@ namespace Dynamend.Desktop.ViewModels
             set
             {
                 _kms = value;
-                OnPropertyChanged(nameof(Kms));
-                OnPropertyChanged(nameof(KmsError));
-                ((CustomCommand)Command).RaiseCanExecuteChanged();
+                OnPropertyChanged();
+                ValidateKms();
             }
         }
 
-        public string KmsError
-        {
-            get => this[nameof(Kms)];
-        }
+      
         public string Engine
         {
             get => engine;
@@ -346,37 +330,41 @@ namespace Dynamend.Desktop.ViewModels
                 OnPropertyChanged();
             }
         }
-        public CustomCommand Command { get; set; }
-        public string this[string columnName]
+      
+        private void ValidateKms()
         {
-            get
-            {
-                if (columnName == nameof(Kms))
-                {
-                    if (string.IsNullOrWhiteSpace(Kms))
-                    {
-                        return "Distance cannot be empty";
-                    }
-                    if (!double.TryParse(Kms, out double result))
-                    {
-                        return "Please enter a valid double value";
-                    }
-                    if (result < 0)
-                    {
-                        return "Negative values are not allowed";
-                    }
-                }
-                return null;
-            }
+           
+            var KmsValidationErrors = new List<string>();
+            if (string.IsNullOrWhiteSpace(Kms))
+                KmsValidationErrors.Add("Kms should not be empty.");
+            if (Kms.Length < 1)
+                KmsValidationErrors.Add("Kms too short.");
+            if (Kms.Length > 20)
+                KmsValidationErrors.Add("Kms too long.");
+
+            if (KmsValidationErrors.Any())
+                _errors[nameof(Kms)] = KmsValidationErrors;
+            else
+                _errors.Remove(nameof(Kms));
+
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(Kms)));
         }
-        public string Error => null;
+        public string Error { get; }
+
+        public bool HasErrors => _errors.Any();
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
+        }
     }
 }
 

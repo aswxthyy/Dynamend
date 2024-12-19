@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dynamend.Desktop.Windows" xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels"
         mc:Ignorable="d"
-        Title="NewCustomer" Height="450" Width="800">
+        Title="NewCustomer" Height="450" Width="800" WindowState="Maximized">
     <Window.DataContext>
         <vm:NewCustomerViewModel/>
     </Window.DataContext>

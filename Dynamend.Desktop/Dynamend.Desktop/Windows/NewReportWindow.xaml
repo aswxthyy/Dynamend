@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels" 
         d:DataContext="{d:DesignInstance Type=vm:NewReportViewModel}"
         mc:Ignorable="d"
-        Title="NewReportWindow" Height="450" Width="800">
+        Title="NewReportWindow" Height="450" Width="800" WindowState="Maximized">
 
     <Window.Resources>
         <Style TargetType="TextBox">
@@ -36,16 +36,16 @@
                     <TextBlock Style="{StaticResource H2}" Text="Name:" Margin="10"></TextBlock>
                     <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerName }" Margin="18" Width="150"/>
                     <TextBlock Style="{StaticResource H2}" Text="License No:" Margin="10"></TextBlock>
-                    <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerLicense}" Margin="18" Width="150"/>
-                    <TextBlock Style="{StaticResource H2}" Text="Model:" Margin="10"></TextBlock>
                     <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerModel}" Margin="18" Width="150"/>
+                    <TextBlock Style="{StaticResource H2}" Text="Model:" Margin="10"></TextBlock>
+                    <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerLicense}" Margin="18" Width="150"/>
                     <TextBlock Style="{StaticResource H2}" Text="Kms:" Margin="10"></TextBlock>
 
                     <StackPanel Orientation="Vertical">
                         <TextBox Style="{StaticResource TxtBox}"
-                                         Text="{Binding Kms,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                                         Text="{Binding Kms,UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"
                                          Margin="18,18,18,0" Width="150"/>
-                        <TextBlock Text="{Binding KmsError,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" Margin="18,0,18,18"></TextBlock>
+                        <!--TextBlock Text="{Binding Kms,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" Margin="18,0,18,18"></TextBlock-->
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

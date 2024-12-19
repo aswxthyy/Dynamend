@@ -11,6 +11,7 @@ using Dynamend.Desktop.Models;
 using Dynamend.Desktop.Pages;
 using Dynamend.Desktop.Repositories;
 
+
 namespace Dynamend.Desktop.ViewModels
 {
     internal class PreviousReportPageViewModel : INotifyPropertyChanged
@@ -111,8 +112,14 @@ namespace Dynamend.Desktop.ViewModels
                 ResultCustomerName = SearchResultCustomer.Name;
                 ResultCustomerLicense = SearchResultCustomer.LicenseNumber;
                 ResultCustomerModel = SearchResultCustomer.VehicleModelName;
-                var reports = _repository.GetServiceReport(ResultCustomerName);
-                ServiceReportsToDisplay.Add(reports);
+                if (SearchResultCustomer != null)
+                {
+                    var reports = _repository.GetServiceReport(ResultCustomerName);
+                    if (reports != null)
+                    {
+                        ServiceReportsToDisplay.Add(reports);
+                    }
+                }
             }
         }
         

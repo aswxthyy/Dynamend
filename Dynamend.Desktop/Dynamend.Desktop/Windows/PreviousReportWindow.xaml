@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Dynamend.Desktop.Windows" 
         xmlns:Vm="clr-namespace:Dynamend.Desktop.ViewModels" d:DataContext="{d:DesignInstance Type=Vm:PreviousReportPageViewModel}"
         mc:Ignorable="d"
-        Title="PreviousReportWindow" Height="450" Width="800" Background="#272727">
+        Title="PreviousReportWindow" Height="450" Width="800" Background="#272727" WindowState="Maximized">
     
     
     <Grid>
@@ -24,11 +24,11 @@
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Margin="10" Text="Vehicle License No : " Style="{StaticResource H2}" ></TextBlock>
-                    <TextBlock  Margin="18" Style="{StaticResource H3}" x:Name="TxtLicenseNumber" Text="{Binding ResultCustomerLicense}" ></TextBlock>
+                    <TextBlock  Margin="18" Style="{StaticResource H3}" x:Name="TxtLicenseNumber" Text="{Binding ResultCustomerModel}" ></TextBlock>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Margin="10" Text="Model Name : "  Style="{StaticResource H2}"></TextBlock>
-                    <TextBlock Margin="18" Style="{StaticResource H3}" x:Name="TxtModelName" Text="{Binding ResultCustomerModel}"></TextBlock>
+                    <TextBlock Margin="18" Style="{StaticResource H3}" x:Name="TxtModelName" Text="{Binding ResultCustomerLicense}"></TextBlock>
                 </WrapPanel>
             </StackPanel>
         </Border>
@@ -39,14 +39,13 @@
         <StackPanel Grid.Row="2">
             <DataGrid 
                    CanUserAddRows="False"
-                   CanUserResizeColumns="True"
-                  
+                   ItemsSource="{Binding ServiceReportsToDisplay}"
+                   CanUserResizeColumns="False"
+                   CanUserDeleteRows="False"
                    FontFamily="Cascadia Mono"
                    Foreground="#859f3d"
                    FontSize="{StaticResource FontMd}"
                    Margin="10"
-                   
-                  
                    AutoGenerateColumns="True">
             </DataGrid>
         </StackPanel>

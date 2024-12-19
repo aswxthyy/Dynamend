@@ -190,41 +190,39 @@ namespace Dynamend.Desktop.Repositories
 
         public ServiceReport GetServiceReport(string name)
         {
-            string query = @"SELECT * FROM ServiceRecord WHERE CustomerName = @name";
-            using (var connection = _dataContext.GetConnection())
+            string query = @"SELECT * FROM ServiceRecord WHERE CustomerName = @name ORDER BY ServiceId DESC LIMIT 1";
+            var connection = _dataContext.GetConnection();
+            var command = new SQLiteCommand(query, connection);
+                
+            command.Parameters.AddWithValue("@name", name);
+            SQLiteDataReader reader = command.ExecuteReader();
             {
-                using (var command = new SQLiteCommand(query, connection))
+                if (reader.Read())
                 {
-                    command.Parameters.AddWithValue("@name", name);
-                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    return new ServiceReport
                     {
-                        if (reader.Read())
-                        {
-                            return new ServiceReport
-                            {
-                               
-                                ServiceDate = DateTime.Parse(reader.GetString(0)),
-                                EngineOperation = reader.GetString(1),
-                                ShiftOperation = reader.GetString(2),
-                                ClutchAndBrake = reader.GetString(3),
-                                Steering = reader.GetString(4),
-                                GrilleAndTrimAndRoofRack = reader.GetString(5),
-                                DoorsAndHoodAndDecklidAndTailGate = reader.GetString(6),
-                                BodyPanelsAndBumpers = reader.GetString(7),
-                                GlassAndOutsideMirrors = reader.GetString(8),
-                                ExteriorLights = reader.GetString(9),
-                                AirBagAndSafetyBelts = reader.GetString(10),
-                                AudioAndAlarmsSystems = reader.GetString(11),
-                                HeatAndVentAndACDeFogAndDeposit = reader.GetString(12),
-                                InteriorAmenities = reader.GetString(13),
+                        ServiceId = reader.GetInt32(0),
+                        ServiceDate = DateTime.Parse(reader.GetString(1)),
+                        EngineOperation = reader.GetString(2),
+                        ShiftOperation = reader.GetString(3),
+                        ClutchAndBrake = reader.GetString(4),
+                        Steering = reader.GetString(5),
+                        GrilleAndTrimAndRoofRack = reader.GetString(6),
+                        DoorsAndHoodAndDecklidAndTailGate = reader.GetString(7),
+                        BodyPanelsAndBumpers = reader.GetString(8),
+                        GlassAndOutsideMirrors = reader.GetString(9),
+                        ExteriorLights = reader.GetString(10),
+                        AirBagAndSafetyBelts = reader.GetString(11),
+                        AudioAndAlarmsSystems = reader.GetString(12),
+                        HeatAndVentAndACDeFogAndDeposit = reader.GetString(13),
+                        InteriorAmenities = reader.GetString(14),
 
-                            };
-                        }
-                    }
+                    };
                 }
-                return null;
+            }
+             return null;
             }
         }
     }
-}
+
 

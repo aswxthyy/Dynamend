@@ -20,8 +20,9 @@ namespace Dynamend.Desktop.ViewModels
         private readonly Repository _repository;
         public ObservableCollection<Customer> Customers { get; set; }
         public CustomCommand SearchCommand { get;}
-       
-        
+        public RelayCommands RefreshCommand { get; set; }
+
+
         private string _name;
 
         public string Name
@@ -42,7 +43,18 @@ namespace Dynamend.Desktop.ViewModels
         {
             _repository = new Repository();
             Customers = new ObservableCollection<Customer>(_repository.GetCustomerList());
+            RefreshCommand = new RelayCommands(Refresh);
             //SearchCommand = new CustomCommand(PerformSearch, CanPerformSearch);
+        }
+
+        private void Refresh()
+        {
+            Customers.Clear();
+             var customers = _repository.GetCustomerList();
+            foreach (var item in customers)
+            {
+                Customers.Add(item);
+            }
         }
 
         //private bool CanPerformSearch()

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Dynamend.Desktop" 
         xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Validation.ErrorTemplate">
@@ -48,12 +48,12 @@
 
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="10,10,30,10">
             <StackPanel  Orientation="Horizontal" Margin="0" VerticalAlignment="Top">
-                <TextBlock Text="Name" HorizontalAlignment="Left" VerticalAlignment="Center"
+                <!--TextBlock Text="Name" HorizontalAlignment="Left" VerticalAlignment="Center"
                        Margin="20"
                        Style="{StaticResource H3}" Width="100"/>
                 <TextBox Style="{StaticResource TxtBox}" Margin="0" 
                   Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
-                         x:Name="TxtSearchName"/>
+                         x:Name="TxtSearchName"/-->
 
                 <TextBlock Text="License Number" HorizontalAlignment="Left" VerticalAlignment="Center"
                        Margin="20"
@@ -75,12 +75,16 @@
                          Background="#302923" 
                          Foreground="#f6fcdf"
                          HorizontalAlignment="Right" 
-                           Margin="0,0,10,0"/>
+                         Margin="0,0,10,0"/>
                     <Button Content="SEARCH" Style="{StaticResource ButtonBase}"
                         HorizontalAlignment="Right"
                         Margin="10"
                         Click="Button_SearchClick"
                         Command="{Binding SearchCommand}"/>
+                    <Button Content="REFRESH" Style="{StaticResource ButtonBase}"
+                        HorizontalAlignment="Right"
+                        Margin="10"
+                        Command="{Binding RefreshCommand}"/>
                 </WrapPanel>
                
             </StackPanel>
@@ -95,30 +99,29 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,10,30,10">
             <DataGrid 
                 CanUserAddRows="False"
-                CanUserResizeColumns="True"
-            
+                CanUserResizeColumns="False"
+                CanUserDeleteRows="False"
                 FontFamily="Cascadia Mono"
                 Foreground="#859f3d"
                 FontSize="{StaticResource FontMd}"
                 Margin="10"
-                
                 ItemsSource="{Binding Customers}"
                 AutoGenerateColumns="False">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 
-                        Width="200"
+                        Width="1*"
                          Header="Customer" 
                          Binding="{Binding Name}"></DataGridTextColumn>
 
                     <DataGridTextColumn
                         Header="License Number"
-                        Width="200"
+                        Width="1*"
                         Binding="{Binding LicenseNumber}"></DataGridTextColumn>
 
                     <DataGridTextColumn
                         Header="Model"
-                        Width="130"
+                        Width="1*"
                         Binding="{Binding VehicleModelName}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

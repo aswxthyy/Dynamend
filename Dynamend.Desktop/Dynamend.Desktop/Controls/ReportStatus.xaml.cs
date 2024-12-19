@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Dynamend.Desktop.Controls
     /// <summary>
     /// Interaction logic for ReportStatus.xaml
     /// </summary>
-    public partial class ReportStatus : UserControl
+    public partial class ReportStatus : UserControl, INotifyPropertyChanged
     {
         public string Text
         {
@@ -46,9 +47,12 @@ namespace Dynamend.Desktop.Controls
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(string), typeof(ReportStatus), new PropertyMetadata(""));
-        
+            DependencyProperty.Register("Value", typeof(string), typeof(ReportStatus), 
+                new FrameworkPropertyMetadata(
+                    "",
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ReportStatus()
         {
@@ -61,7 +65,7 @@ namespace Dynamend.Desktop.Controls
             var radioBtn = sender as RadioButton;
             var tag = radioBtn.Tag as string;
             Value = tag;
-            MessageBox.Show(Value);
+            //MessageBox.Show(Value);
         }
     }
 }

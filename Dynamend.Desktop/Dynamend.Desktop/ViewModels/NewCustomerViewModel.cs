@@ -30,10 +30,10 @@ namespace Dynamend.Desktop.ViewModels
         private void SaveCustomer()
         {
             if (HasErrors)
-                {
-                  MessageBox.Show("Please fix the validation errors","Validation Error",MessageBoxButton.OK, MessageBoxImage.Error);
-                  return;
-                }
+            {
+              MessageBox.Show("Please fix the validation errors","Validation Error",MessageBoxButton.OK, MessageBoxImage.Error);
+              return;
+            }
                 var newCustomer = new Customer
                 {
                     Name = this.Name,
@@ -44,6 +44,7 @@ namespace Dynamend.Desktop.ViewModels
                 };
             _repository.AddCustomer(newCustomer);
             MessageBox.Show("Customer Added Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            Refresh();
         }
 
         private string _name;
@@ -155,6 +156,13 @@ namespace Dynamend.Desktop.ViewModels
         {
             return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
         }
-       
+       public void Refresh()
+       {
+            Name = string.Empty;
+            Phone = string.Empty;
+            Address = string.Empty;
+            License = string.Empty;
+            Model = string.Empty;
+       }
     }
 }
