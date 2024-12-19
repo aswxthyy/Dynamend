@@ -15,40 +15,38 @@ namespace Dynamend.Desktop.Repositories
 {
     internal class Repository
     {
-        private readonly DataContext _dataContext;
+        private readonly DataContext _dataContext = new DataContext();
 
         public Repository()
         {
             CreateCustomerTable();
-            CreateServiceReportTable();
+            CreateServiceReportsTable();
         }
 
         private void CreateCustomerTable()
         {
             string createTableQuery = @"
-            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Customer' AND xtype='U')
-            BEGIN
-            CREATE TABLE Customer (
-            CustomerId INT PRIMARY KEY IDENTITY,
+            CREATE TABLE  IF NOT EXISTS Customer (
+            CustomerId INTEGER PRIMARY KEY AUTOINCREMENT,
             Name VARCHAR(100) NOT NULL,
             ContactNumber VARCHAR(12) NOT NULL,
             Address VARCHAR(200) NOT NULL,
-            Vehicle Model Name VARCHAR(100) NOT NULL,
-            License Number VARCHAR(10) NOT NULL,
-            );
-            END";
+            VehicleModelName VARCHAR(100) NOT NULL,
+            LicenseNumber VARCHAR(10) NOT NULL
+            );";
+            
             var connection = _dataContext.GetConnection();
-            SQLiteCommand command = new SQLiteCommand(createTableQuery, connection);
-            command.ExecuteNonQuery();
+            using (SQLiteCommand command = new SQLiteCommand(createTableQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
         }
 
-        private void CreateServiceReportTable()
+        private void CreateServiceReportsTable()
         {
             string createTableQuery = @"
-            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='ServiceReport' AND xtype='U')
-            BEGIN
-            CREATE TABLE ServiceReport (
-            ServiceId INT PRIMARY KEY IDENTITY,
+            CREATE TABLE IF NOT EXISTS ServiceRecord (
+            ServiceId INTEGER PRIMARY KEY AUTOINCREMENT,
             ServiceDate DateTime NOT NULL,
             EngineOperation VARCHAR(200) NOT NULL,
             ShiftOperation VARCHAR(200) NOT NULL,
@@ -63,50 +61,56 @@ namespace Dynamend.Desktop.Repositories
             AudioAndAlarmsSystems VARCHAR(200) NOT NULL,
             HeatAndVentAndACDeFogAndDeposit VARCHAR(200) NOT NULL,
             InteriorAmenities VARCHAR(200) NOT NULL,
-            CustomerId INT ,
-            CONSTRAINT FK_Customer_Id FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
-            );
-            END";
+            TotalCost  VARCHAR(200) NOT NULL,
+            Kms VARCHAR(100) NOT NULL,
+            CustomerName VARCHAR(100),
+            CONSTRAINT FK_Customer_Name FOREIGN KEY (CustomerName) REFERENCES Customer(Name)
+            );";
             var connection = _dataContext.GetConnection();
-            SQLiteCommand command = new SQLiteCommand(createTableQuery, connection);
-            command.ExecuteNonQuery();
+            using (SQLiteCommand command = new SQLiteCommand(createTableQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
         }
         public void AddCustomer(Customer customer)
         {
-            string query = "INSERT INTO Customer (Name, ContactNumber, Address, Vehicle Model Name, License Number   ) VALUES (@Name, @ContactNumber, @Address, @Vehicle Model Name, @License Number )";
+            string query = "INSERT INTO Customer (Name, ContactNumber, Address, VehicleModelName, LicenseNumber   ) VALUES (@Name, @ContactNumber, @Address, @VehicleModelName, @LicenseNumber )";
             var connection = _dataContext.GetConnection();
             SQLiteCommand command = new SQLiteCommand(query, connection);
-            command.Parameters.AddWithValue("@Name", customer.Name);
-            command.Parameters.AddWithValue("@ContactNumber", customer.ContactNumber);
-            command.Parameters.AddWithValue("@Address", customer.Address);
-            command.Parameters.AddWithValue("@Vehicle Model Name", customer.VehicleModelName);
-            command.Parameters.AddWithValue("@License Number", customer.LicenseNumber);
-
-            command.ExecuteNonQuery();
+            
+                command.Parameters.AddWithValue("@Name", customer.Name);
+                command.Parameters.AddWithValue("@ContactNumber", customer.ContactNumber);
+                command.Parameters.AddWithValue("@Address", customer.Address);
+                command.Parameters.AddWithValue("@VehicleModelName", customer.VehicleModelName);
+                command.Parameters.AddWithValue("@LicenseNumber", customer.LicenseNumber);
+                command.ExecuteNonQuery();
+            
         }
         public void AddServiceReport(ServiceReport serviceReport)
         {
-            string query = "INSERT INTO Customer (CustomerId, ServiceDate, EngineOperation, ShiftOperation, ClutchAndBrake, Steering, GrilleAndTrimAndRoofRack, DoorsAndHoodAndDecklidAndTailGate, BodyPanelsAndBumpers, GlassAndOutsideMirrors, ExteriorLights, AirBagAndSafetyBelts, AudioAndAlarmsSystems, HeatAndVentAndACDeFogAndDeposit, InteriorAmenities) VALUES (@CustomerId, @ServiceDate, @EngineOperation, @ShiftOperation, @ClutchAndBrake, @Steering, @GrilleAndTrimAndRoofRack, @DoorsAndHoodAndDecklidAndTailGate, @BodyPanelsAndBumpers, @GlassAndOutsideMirrors, @ExteriorLights, @AirBagAndSafetyBelts, @AudioAndAlarmsSystems, @HeatAndVentAndACDeFogAndDeposit, @InteriorAmenities)";
+            string query = "INSERT INTO ServiceRecord (Customername, ServiceDate, EngineOperation, ShiftOperation, ClutchAndBrake, Steering, GrilleAndTrimAndRoofRack, DoorsAndHoodAndDecklidAndTailGate, BodyPanelsAndBumpers, GlassAndOutsideMirrors, ExteriorLights, AirBagAndSafetyBelts, AudioAndAlarmsSystems, HeatAndVentAndACDeFogAndDeposit, InteriorAmenities, TotalCost, Kms) VALUES (@CustomerName, @ServiceDate, @EngineOperation, @ShiftOperation, @ClutchAndBrake, @Steering, @GrilleAndTrimAndRoofRack, @DoorsAndHoodAndDecklidAndTailGate, @BodyPanelsAndBumpers, @GlassAndOutsideMirrors, @ExteriorLights, @AirBagAndSafetyBelts, @AudioAndAlarmsSystems, @HeatAndVentAndACDeFogAndDeposit, @InteriorAmenities, @TotalCost, @Kms)";
             var connection = _dataContext.GetConnection();
             SQLiteCommand command = new SQLiteCommand(query, connection);
-            command.Parameters.AddWithValue("@CustomerId", serviceReport.CustomerId);
-            command.Parameters.AddWithValue("@ServiceDate", serviceReport.ServiceDate);
-            command.Parameters.AddWithValue("@EngineOperation", serviceReport.EngineOperation);
-            command.Parameters.AddWithValue("@ShiftOperation", serviceReport.ShiftOperation);
-            command.Parameters.AddWithValue("@ClutchAndBrake", serviceReport.ClutchAndBrake);
-            command.Parameters.AddWithValue("@Steering", serviceReport.Steering);
-            command.Parameters.AddWithValue("@GrilleAndTrimAndRoofRack", serviceReport.GrilleAndTrimAndRoofRack);
-            command.Parameters.AddWithValue("@DoorsAndHoodAndDecklidAndTailGate", serviceReport.DoorsAndHoodAndDecklidAndTailGate);
-            command.Parameters.AddWithValue("@BodyPanelsAndBumpers", serviceReport.BodyPanelsAndBumpers);
-            command.Parameters.AddWithValue("@GlassAndOutsideMirrors", serviceReport.GlassAndOutsideMirrors);
-            command.Parameters.AddWithValue("@ExteriorLights", serviceReport.ExteriorLights);
-            command.Parameters.AddWithValue("@AirBagAndSafetyBelts", serviceReport.AirBagAndSafetyBelts);
-            command.Parameters.AddWithValue("@AudioAndAlarmsSystems", serviceReport.AudioAndAlarmsSystems);
-            command.Parameters.AddWithValue("@HeatAndVentAndACDeFogAndDeposit", serviceReport.HeatAndVentAndACDeFogAndDeposit);
-            command.Parameters.AddWithValue("@InteriorAmenities", serviceReport.InteriorAmenities);
-           
-
-            command.ExecuteNonQuery();
+            
+                command.Parameters.AddWithValue("@CustomerName", serviceReport.CustomerName);
+                command.Parameters.AddWithValue("@ServiceDate", serviceReport.ServiceDate);
+                command.Parameters.AddWithValue("@EngineOperation", serviceReport.EngineOperation);
+                command.Parameters.AddWithValue("@ShiftOperation", serviceReport.ShiftOperation);
+                command.Parameters.AddWithValue("@ClutchAndBrake", serviceReport.ClutchAndBrake);
+                command.Parameters.AddWithValue("@Steering", serviceReport.Steering);
+                command.Parameters.AddWithValue("@GrilleAndTrimAndRoofRack", serviceReport.GrilleAndTrimAndRoofRack);
+                command.Parameters.AddWithValue("@DoorsAndHoodAndDecklidAndTailGate", serviceReport.DoorsAndHoodAndDecklidAndTailGate);
+                command.Parameters.AddWithValue("@BodyPanelsAndBumpers", serviceReport.BodyPanelsAndBumpers);
+                command.Parameters.AddWithValue("@GlassAndOutsideMirrors", serviceReport.GlassAndOutsideMirrors);
+                command.Parameters.AddWithValue("@ExteriorLights", serviceReport.ExteriorLights);
+                command.Parameters.AddWithValue("@AirBagAndSafetyBelts", serviceReport.AirBagAndSafetyBelts);
+                command.Parameters.AddWithValue("@AudioAndAlarmsSystems", serviceReport.AudioAndAlarmsSystems);
+                command.Parameters.AddWithValue("@HeatAndVentAndACDeFogAndDeposit", serviceReport.HeatAndVentAndACDeFogAndDeposit);
+                command.Parameters.AddWithValue("@InteriorAmenities", serviceReport.InteriorAmenities);
+                command.Parameters.AddWithValue("@TotalCost", serviceReport.TotalCost);
+                command.Parameters.AddWithValue("@Kms", serviceReport.Kms);
+                command.ExecuteNonQuery();
+            
         }
         public List<Customer> GetCustomerList()
         {
@@ -136,39 +140,90 @@ namespace Dynamend.Desktop.Repositories
             }
             return list;
         }
-        public ServiceReport GetServiceReport(string name)
+        public Customer GetCustomer(string name)
         {
-            string query = "@ SELECT Customer.Name, FROM Customer JOIN ServiceReport ON Customer.CustomerId = ServiceReport.CustomerId WHERE Customer.Name = @ name ";
             var connection = _dataContext.GetConnection();
-           var result = new ServiceReport();
+            string query = @"SELECT * FROM Customer WHERE Name = @name";
             var command = new SQLiteCommand(query, connection);
             command.Parameters.AddWithValue("@name", name);
+             SQLiteDataReader reader = command.ExecuteReader();
+              {
+                        if (reader.Read())
+                        {
+                            return new Customer
+                            {
+                                CustomerId = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                ContactNumber = reader.GetString(2),
+                                Address = reader.GetString(3),
+                                LicenseNumber = reader.GetString(4),
+                                VehicleModelName = reader.GetString(5),
+                            };
+                        }
+                        return null;
+              }
+                
+        }
+        public Customer GetCustomerByLicense(string license)
+        {
+            var connection = _dataContext.GetConnection();
+            string query = @"SELECT * FROM Customer WHERE LicenseNumber = @license";
+            var command = new SQLiteCommand(query, connection);
+            command.Parameters.AddWithValue("@license", license);
             SQLiteDataReader reader = command.ExecuteReader();
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    result =new ServiceReport
+                    return new Customer
                     {
                         CustomerId = reader.GetInt32(0),
-                        ServiceDate = DateTime.Parse(reader.GetString(1)),
-                        EngineOperation = reader.GetString(2),
-                        ShiftOperation = reader.GetString(3),
-                        ClutchAndBrake = reader.GetString(4),
-                        Steering = reader.GetString(5),
-                        GrilleAndTrimAndRoofRack = reader.GetString(6),
-                        DoorsAndHoodAndDecklidAndTailGate = reader.GetString(7),
-                        BodyPanelsAndBumpers = reader.GetString(8),
-                        GlassAndOutsideMirrors = reader.GetString(9),
-                        ExteriorLights = reader.GetString(10),
-                        AirBagAndSafetyBelts = reader.GetString(11),
-                        AudioAndAlarmsSystems = reader.GetString(12),
-                        HeatAndVentAndACDeFogAndDeposit = reader.GetString(13),
-                        InteriorAmenities = reader.GetString(14),
-
+                        Name = reader.GetString(1),
+                        ContactNumber = reader.GetString(2),
+                        Address = reader.GetString(3),
+                        LicenseNumber = reader.GetString(4),
+                        VehicleModelName = reader.GetString(5),
                     };
                 }
+                return null;
             }
-            return result;
+        }
+
+        public ServiceReport GetServiceReport(string name)
+        {
+            string query = @"SELECT * FROM ServiceRecord WHERE CustomerName = @name";
+            using (var connection = _dataContext.GetConnection())
+            {
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@name", name);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new ServiceReport
+                            {
+                               
+                                ServiceDate = DateTime.Parse(reader.GetString(0)),
+                                EngineOperation = reader.GetString(1),
+                                ShiftOperation = reader.GetString(2),
+                                ClutchAndBrake = reader.GetString(3),
+                                Steering = reader.GetString(4),
+                                GrilleAndTrimAndRoofRack = reader.GetString(5),
+                                DoorsAndHoodAndDecklidAndTailGate = reader.GetString(6),
+                                BodyPanelsAndBumpers = reader.GetString(7),
+                                GlassAndOutsideMirrors = reader.GetString(8),
+                                ExteriorLights = reader.GetString(9),
+                                AirBagAndSafetyBelts = reader.GetString(10),
+                                AudioAndAlarmsSystems = reader.GetString(11),
+                                HeatAndVentAndACDeFogAndDeposit = reader.GetString(12),
+                                InteriorAmenities = reader.GetString(13),
+
+                            };
+                        }
+                    }
+                }
+                return null;
+            }
         }
     }
 }

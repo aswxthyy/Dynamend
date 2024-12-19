@@ -23,14 +23,20 @@ namespace Dynamend.Desktop.Controls
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            set { 
+                SetValue(TextProperty, value); 
+            }
         }
 
         // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(ReportStatus), new PropertyMetadata(""));
+            DependencyProperty.Register("Text", typeof(string), typeof(ReportStatus), new PropertyMetadata("", TextChanged));
 
-
+        private static void TextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var reportStatus = (ReportStatus)d;
+            reportStatus.TxtLabel.Text = (string)e.NewValue;
+        }
 
         public string Value
         {
@@ -47,7 +53,7 @@ namespace Dynamend.Desktop.Controls
         public ReportStatus()
         {
             InitializeComponent();
-            DataContext = this;
+            //DataContext = this;
         }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +61,7 @@ namespace Dynamend.Desktop.Controls
             var radioBtn = sender as RadioButton;
             var tag = radioBtn.Tag as string;
             Value = tag;
-           
+            MessageBox.Show(Value);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Dynamend.Desktop.Data
         public DataContext()
         {
             _appDataPath = Path.Combine(_systemAppDataPah, "Dynamend");
-            _dbPath = Path.Combine(_appDataPath, _dbPath);
+            _dbPath = Path.Combine(_appDataPath, _dbName);
 
             Directory.CreateDirectory(_appDataPath);
             _connection = new SQLiteConnection($"Data Source={_dbPath}");

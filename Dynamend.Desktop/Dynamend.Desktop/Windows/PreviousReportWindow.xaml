@@ -1,0 +1,57 @@
+﻿<Window x:Class="Dynamend.Desktop.Windows.PreviousReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dynamend.Desktop.Windows" 
+        xmlns:Vm="clr-namespace:Dynamend.Desktop.ViewModels" d:DataContext="{d:DesignInstance Type=Vm:PreviousReportPageViewModel}"
+        mc:Ignorable="d"
+        Title="PreviousReportWindow" Height="450" Width="800" Background="#272727">
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <WrapPanel>
+                    <TextBlock Margin="10" Text="Name : " Style="{StaticResource H2}"></TextBlock>
+                    <TextBlock Margin="18"  Style="{StaticResource H3}" x:Name="TxtName" Text="{Binding ResultCustomerName}"></TextBlock>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Margin="10" Text="Vehicle License No : " Style="{StaticResource H2}" ></TextBlock>
+                    <TextBlock  Margin="18" Style="{StaticResource H3}" x:Name="TxtLicenseNumber" Text="{Binding ResultCustomerLicense}" ></TextBlock>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Margin="10" Text="Model Name : "  Style="{StaticResource H2}"></TextBlock>
+                    <TextBlock Margin="18" Style="{StaticResource H3}" x:Name="TxtModelName" Text="{Binding ResultCustomerModel}"></TextBlock>
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="PREVIOUS REPORT PAGE" Style="{StaticResource H2}" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <DataGrid 
+                   CanUserAddRows="False"
+                   CanUserResizeColumns="True"
+                  
+                   FontFamily="Cascadia Mono"
+                   Foreground="#859f3d"
+                   FontSize="{StaticResource FontMd}"
+                   Margin="10"
+                   
+                  
+                   AutoGenerateColumns="True">
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center">
+            <Button Click="BtnNewReport_Click" Content="New" Style="{StaticResource ButtonBase}" x:Name="BtnNewReport"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

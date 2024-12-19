@@ -3,10 +3,63 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Dynamend.Desktop.Windows"
+        xmlns:local="clr-namespace:Dynamend.Desktop.Windows" xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels"
         mc:Ignorable="d"
         Title="NewCustomer" Height="450" Width="800">
-    <Grid>
-        
+    <Window.DataContext>
+        <vm:NewCustomerViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#302923">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
+                <TextBlock Text="Name" Style="{StaticResource H3}" Margin="10,10,50,10"/>
+                <TextBox Style="{StaticResource TxtBox}" HorizontalAlignment="Left"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Phone" Style="{StaticResource H3}" Margin="10,10,43,10"/>
+                <TextBox Style="{StaticResource TxtBox}" HorizontalAlignment="Left"
+                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Address" Style="{StaticResource H3}" Margin="10,10,27,10"/>
+                <TextBox Style="{StaticResource TxtBox}" HorizontalAlignment="Left" AcceptsReturn="True"
+                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1"  Margin="0,50,0,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="License Number" Style="{StaticResource H3}" Margin="10,10,20,10"/>
+                <TextBox Style="{StaticResource TxtBox}" HorizontalAlignment="Left"
+                         Text="{Binding License, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Model" Style="{StaticResource H3}" Margin="10,10,95,10"/>
+                <TextBox Style="{StaticResource TxtBox}" HorizontalAlignment="Left"
+                     Text="{Binding Model, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            </StackPanel>
+            <Button Style="{StaticResource ButtonBase}" Margin="250,270,0,0" Content="REGISTER" Command="{Binding RegisterCommand}"/>
+        </StackPanel>
+
     </Grid>
 </Window>

@@ -8,7 +8,7 @@ namespace Dynamend.Desktop.Models
 {
     internal class ServiceReport
     {
-        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public int ServiceId { get; set; }
         public DateTime ServiceDate { get; set; }
         public string EngineOperation { get; set; }
@@ -24,8 +24,8 @@ namespace Dynamend.Desktop.Models
         public string AudioAndAlarmsSystems { get; set; }
         public string HeatAndVentAndACDeFogAndDeposit { get; set; }
         public string InteriorAmenities { get; set; }
-        public string Passed { get; set; }
-        public string Repaired { get; set; }
-        public string Replaced { get; set; }
+        public double TotalCost { get; set; }
+        public string Kms { get; set; }
+       
     }
 }

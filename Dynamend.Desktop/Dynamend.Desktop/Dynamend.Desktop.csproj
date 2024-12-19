@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommands.cs" />
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\ServiceReport.cs" />
@@ -86,6 +87,12 @@
       <DependentUpon>ReportStatus.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\NewReportViewModel.cs" />
+    <Compile Include="Windows\NewReportWindow.xaml.cs">
+      <DependentUpon>NewReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PreviousReportWindow.xaml.cs">
+      <DependentUpon>PreviousReportWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\ReportStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +152,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\NewCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PreviousReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

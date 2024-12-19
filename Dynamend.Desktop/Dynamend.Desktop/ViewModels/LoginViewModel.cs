@@ -1,18 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Dynamend.Desktop.Commands;
+using Dynamend.Desktop.Models;
+using Dynamend.Desktop.Repositories;
+using Dynamend.Desktop.Windows;
 
 namespace Dynamend.Desktop.ViewModels
 {
     internal class LoginViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
-
+        private readonly Repository _repository;
+        public ObservableCollection<Customer> Customers { get; set; }
+        public CustomCommand SearchCommand { get;}
+       
+        
         private string _name;
 
         public string Name
@@ -23,11 +32,35 @@ namespace Dynamend.Desktop.ViewModels
                 _name = value;
                 OnPropertyChanged();
                 ValidateName();
+                //SearchCommand.RaiseCanExecuteChanged();
+                //PerformSearch();
             }
         }
 
-        private string _license;
+        
+        public LoginViewModel()
+        {
+            _repository = new Repository();
+            Customers = new ObservableCollection<Customer>(_repository.GetCustomerList());
+            //SearchCommand = new CustomCommand(PerformSearch, CanPerformSearch);
+        }
 
+        //private bool CanPerformSearch()
+        //{
+        //    return Name != null && Name.Length > 0;
+        //}
+
+        //private void PerformSearch()
+        //{
+        //    var previousReportViewModel = new PreviousReportPageViewModel()
+        //    { SelectedCustomerName = Name };
+        //    var previousReportWindow = new PreviousReportWindow
+        //    {
+        //        DataContext = previousReportViewModel
+        //    };
+        //}
+
+        private string _license;
         public string License
         {
             get { return _license; }

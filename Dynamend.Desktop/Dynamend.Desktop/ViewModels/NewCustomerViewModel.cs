@@ -7,13 +7,44 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
+using Dynamend.Desktop.Repositories;
+using System.Windows;
+using Dynamend.Desktop.Models;
+using Dynamend.Desktop.Commands;
 
 
 namespace Dynamend.Desktop.ViewModels
 {
     internal class NewCustomerViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+        private readonly Repository _repository;
         private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
+        public RelayCommands RegisterCommand { get;}
+
+        public NewCustomerViewModel()
+        {
+            _repository = new Repository();
+            RegisterCommand = new RelayCommands(SaveCustomer);
+        }
+
+        private void SaveCustomer()
+        {
+            if (HasErrors)
+                {
+                  MessageBox.Show("Please fix the validation errors","Validation Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                  return;
+                }
+                var newCustomer = new Customer
+                {
+                    Name = this.Name,
+                    ContactNumber = this.Phone,
+                    Address = this.Address,
+                    LicenseNumber = this.License,
+                    VehicleModelName = this.Model,
+                };
+            _repository.AddCustomer(newCustomer);
+            MessageBox.Show("Customer Added Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
         private string _name;
 
@@ -124,5 +155,6 @@ namespace Dynamend.Desktop.ViewModels
         {
             return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
         }
+       
     }
 }

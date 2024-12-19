@@ -8,10 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800" d:Background="Black">
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Text}" Style="{StaticResource H3}" Margin="10"></TextBlock>
-            <RadioButton  Style="{StaticResource Rbutton}" Content="Passed" IsChecked="{Binding SelectedOption}"  Tag="Passed" Click="RadioButton_Click"></RadioButton>
-            <RadioButton  Style="{StaticResource Rbutton}" Content="Repaired" IsChecked="{Binding SelectedOption}" Tag="Repaired" Click="RadioButton_Click"></RadioButton>
-            <RadioButton  Style="{StaticResource Rbutton}" Content="Replaced" IsChecked="{Binding SelectedOption}"  Tag="Replaced" Click="RadioButton_Click"></RadioButton>
+            <TextBlock x:Name="TxtLabel" Text="DEFAULT" Style="{StaticResource H3}" Margin="10"></TextBlock>
+            <RadioButton  Style="{StaticResource Rbutton}" Content="Passed" Tag="Passed" Click="RadioButton_Click"></RadioButton>
+            <RadioButton  Style="{StaticResource Rbutton}" Content="Repaired" Tag="Repaired" Click="RadioButton_Click"></RadioButton>
+            <RadioButton  Style="{StaticResource Rbutton}" Content="Replaced" Tag="Replaced" Click="RadioButton_Click"></RadioButton>
         </StackPanel>
     </StackPanel>
 

@@ -1,0 +1,108 @@
+﻿<Window x:Class="Dynamend.Desktop.Windows.NewReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dynamend.Desktop.Windows" xmlns:controls="clr-namespace:Dynamend.Desktop.Controls" 
+        xmlns:vm="clr-namespace:Dynamend.Desktop.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=vm:NewReportViewModel}"
+        mc:Ignorable="d"
+        Title="NewReportWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"></TextBlock>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#272727">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel  Orientation="Vertical" Grid.Row="0">
+                <Label Style="{StaticResource H1}" Content="NEW REPORT" HorizontalContentAlignment="Center" Margin="10"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource H2}" Text="Name:" Margin="10"></TextBlock>
+                    <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerName }" Margin="18" Width="150"/>
+                    <TextBlock Style="{StaticResource H2}" Text="License No:" Margin="10"></TextBlock>
+                    <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerLicense}" Margin="18" Width="150"/>
+                    <TextBlock Style="{StaticResource H2}" Text="Model:" Margin="10"></TextBlock>
+                    <TextBlock Style="{StaticResource H3}" Text="{Binding ResultCustomerModel}" Margin="18" Width="150"/>
+                    <TextBlock Style="{StaticResource H2}" Text="Kms:" Margin="10"></TextBlock>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Style="{StaticResource TxtBox}"
+                                         Text="{Binding Kms,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                                         Margin="18,18,18,0" Width="150"/>
+                        <TextBlock Text="{Binding KmsError,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" Margin="18,0,18,18"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        <StackPanel Grid.Row="1" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    
+                    <controls:ReportStatus Text="ENGINE" Value="{Binding Path=Engine, UpdateSourceTrigger=PropertyChanged}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="SHIFT" Value="{Binding Shift}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="CLUTCH AND BRAKE" Value="{Binding Clutch}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="STEERING" Value="{Binding Steering}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="GRILLE,TRIM AND ROOF RACK" Value="{Binding Grille}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="DOORS,HOOD,DECKLID,TAILGATE" Value="{Binding Doors}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="BODY PANELS AND BUMPERS" Value="{Binding Bodypanels}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="GLASS AND OUTSIDE MIRRORS" Value="{Binding Glass}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="EXTERIOR LIGHTS" Value="{Binding Exterior}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="AIRBAG AND SAFETY BELTS" Value="{Binding Airbag}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="AUDIO AND ALARM SYSTEMS" Value="{Binding Audio}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="HEAT/VENT/AC/DEFOG/DEFROST" Value="{Binding Vent}"></controls:ReportStatus>
+                    <controls:ReportStatus Text="INTERIOR AMENITIES" Value="{Binding Interior}"></controls:ReportStatus>
+
+
+                </StackPanel>
+
+                <!--StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource H2}" Margin="10">CUSTOM REPAIRS</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ListView Style="{StaticResource ListStyle}" Width="150" Margin="10">
+                            <ListViewItem Content="Engine"></ListViewItem>
+                            <ListViewItem Content="Brake"></ListViewItem>
+                            <ListViewItem Content="Clutch"></ListViewItem>
+                            <ListViewItem Content="Exterior Lights"></ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel-->
+
+                <StackPanel Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Style="{StaticResource H3}" Margin="10" Width="50">Cost:</TextBlock>
+                        <TextBox Text="{Binding TotalCost}"  Margin="10"  Width="50"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <DockPanel Dock="Bottom" Margin="10,350,10,10" Grid.Column="2">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource H3}" Margin="15" Width="90">Total Cost:</TextBlock>
+                            <TextBlock Text="{Binding TotalCost}"  Margin="15" Style="{StaticResource H3}" Width="50"></TextBlock>
+                        </StackPanel>
+                        <Button Style="{StaticResource ButtonBase}" HorizontalAlignment="Left" Click="Button_Click" Command="{Binding SavenewReportCommand}">OK</Button>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+        </StackPanel>
+    </Grid> 
+</Window>

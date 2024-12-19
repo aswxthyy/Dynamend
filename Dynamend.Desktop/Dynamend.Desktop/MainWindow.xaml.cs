@@ -27,11 +27,14 @@ namespace Dynamend.Desktop
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_SearchClick(object sender, RoutedEventArgs e)
         {
-            new NewCustomer().ShowDialog();
+            new PreviousReportWindow(TxtSearchLicense.Text).Show();
         }
 
-
+        private void Button_AddUserClick(object sender, RoutedEventArgs e)
+        {
+            new NewCustomer().Show();
+        }
     }
 }

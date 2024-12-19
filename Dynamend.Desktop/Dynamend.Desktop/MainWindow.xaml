@@ -21,7 +21,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-
+    
     <Window.DataContext>
         <vm:LoginViewModel/>
     </Window.DataContext>
@@ -42,31 +42,47 @@
             <TextBlock Text="one stop pitstop." Style="{StaticResource H3}"
                     Margin="15,0,0,0"
                     Foreground="#859f3d"
-                    FontWeight="Normal"/>
+                    FontWeight="Normal"
+                       HorizontalAlignment="Left"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="10,10,30,10">
             <StackPanel  Orientation="Horizontal" Margin="0" VerticalAlignment="Top">
                 <TextBlock Text="Name" HorizontalAlignment="Left" VerticalAlignment="Center"
                        Margin="20"
-                       Style="{StaticResource H3}"/>
-                <TextBox Style="{StaticResource TxtBox}" Margin="0" Width="150"
-                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+                       Style="{StaticResource H3}" Width="100"/>
+                <TextBox Style="{StaticResource TxtBox}" Margin="0" 
+                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                         x:Name="TxtSearchName"/>
 
                 <TextBlock Text="License Number" HorizontalAlignment="Left" VerticalAlignment="Center"
                        Margin="20"
-                       Style="{StaticResource H3}"/>
+                       Style="{StaticResource H3}" Width="150"/>
+
                 <TextBox Style="{StaticResource TxtBox}" Margin="0" Width="150" 
-                  Text="{Binding License, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+                  Text="{Binding License, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                         x:Name="TxtSearchLicense"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
-                <Button Content="SEARCH" Style="{StaticResource ButtonBase}"
-                        HorizontalAlignment="Right"
-                        Margin="10"/>
-                <TextBlock Text="New Customer?" Style="{StaticResource H3}"
-                         HorizontalAlignment="Right" TextDecorations="Underline"
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+                <WrapPanel>
+                    <Button  Content="New Customer?" 
+                         Click="Button_AddUserClick"
+                         FontSize="14"
+                         FontFamily="Cascadia Mono"
+                         FontWeight="Light" 
+                         BorderThickness="0" 
+                         Background="#302923" 
+                         Foreground="#f6fcdf"
+                         HorizontalAlignment="Right" 
                            Margin="0,0,10,0"/>
+                    <Button Content="SEARCH" Style="{StaticResource ButtonBase}"
+                        HorizontalAlignment="Right"
+                        Margin="10"
+                        Click="Button_SearchClick"
+                        Command="{Binding SearchCommand}"/>
+                </WrapPanel>
+               
             </StackPanel>
         </StackPanel>
 
@@ -80,13 +96,14 @@
             <DataGrid 
                 CanUserAddRows="False"
                 CanUserResizeColumns="True"
-                AutoGenerateColumns="True"
+            
                 FontFamily="Cascadia Mono"
                 Foreground="#859f3d"
-                FontSize="{Binding FontMd}"
+                FontSize="{StaticResource FontMd}"
                 Margin="10"
-                SelectedItem="{Binding SelectedItem}"
-                ItemsSource="{Binding Users}">
+                
+                ItemsSource="{Binding Customers}"
+                AutoGenerateColumns="False">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 
@@ -97,12 +114,12 @@
                     <DataGridTextColumn
                         Header="License Number"
                         Width="200"
-                        Binding="{Binding License}"></DataGridTextColumn>
+                        Binding="{Binding LicenseNumber}"></DataGridTextColumn>
 
                     <DataGridTextColumn
                         Header="Model"
                         Width="130"
-                        Binding="{Binding Model}"></DataGridTextColumn>
+                        Binding="{Binding VehicleModelName}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
