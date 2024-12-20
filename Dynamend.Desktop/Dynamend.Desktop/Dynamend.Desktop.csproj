@@ -209,13 +209,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\car.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\carblueprint.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\R.png" />

@@ -140,7 +140,7 @@ namespace Dynamend.Desktop.ViewModels
         private string _model;
         private string _kms;
         private double _cost;
-        private double _totalCost;
+        private string _totalCost;
         private string engine;
         private string shift;
         private string clutch;
@@ -192,7 +192,7 @@ namespace Dynamend.Desktop.ViewModels
                 OnPropertyChanged();
             }
         }
-        public double TotalCost
+        public string TotalCost
         {
             get => _totalCost;
             set

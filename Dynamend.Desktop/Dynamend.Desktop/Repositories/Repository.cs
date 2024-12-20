@@ -216,6 +216,8 @@ namespace Dynamend.Desktop.Repositories
                         AudioAndAlarmsSystems = reader.GetString(12),
                         HeatAndVentAndACDeFogAndDeposit = reader.GetString(13),
                         InteriorAmenities = reader.GetString(14),
+                        TotalCost = reader.GetString(15),
+                        Kms = reader.GetString(16),
 
                     };
                 }

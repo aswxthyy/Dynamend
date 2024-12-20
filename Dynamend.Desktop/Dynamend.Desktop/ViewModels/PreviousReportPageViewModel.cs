@@ -114,12 +114,18 @@ namespace Dynamend.Desktop.ViewModels
                 ResultCustomerModel = SearchResultCustomer.VehicleModelName;
                 if (SearchResultCustomer != null)
                 {
+
                     var reports = _repository.GetServiceReport(ResultCustomerName);
+                   
                     if (reports != null)
                     {
                         ServiceReportsToDisplay.Add(reports);
                     }
                 }
+                //else
+                //{
+                //    MessageBox.Show("Customer Not Found","", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
             }
         }
         

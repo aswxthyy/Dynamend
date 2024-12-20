@@ -24,7 +24,7 @@ namespace Dynamend.Desktop.Models
         public string AudioAndAlarmsSystems { get; set; }
         public string HeatAndVentAndACDeFogAndDeposit { get; set; }
         public string InteriorAmenities { get; set; }
-        public double TotalCost { get; set; }
+        public string TotalCost { get; set; }
         public string Kms { get; set; }
        
     }
