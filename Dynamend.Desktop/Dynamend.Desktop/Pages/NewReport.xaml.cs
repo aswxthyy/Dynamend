@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,23 +14,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dynamend.Desktop.Commands;
 
 namespace Dynamend.Desktop.Pages
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for NewReport.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class NewReport : Page
     {
-        public Login()
+        public NewReport()
         {
             InitializeComponent();
+           
         }
-
-        private void Button_LoginClick(object sender, RoutedEventArgs e)
+       
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var p = (NavigationWindow)this.Parent;
-            p.Navigate(new Pages.PreviousReportPage());
+            MessageBox.Show("Report Generated");
         }
     }
 }

@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Dynamend.Desktop.Pages
+namespace Dynamend.Desktop.Windows
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for NewCustomer.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class NewCustomer : Window
     {
-        public Login()
+        public NewCustomer()
         {
             InitializeComponent();
-        }
-
-        private void Button_LoginClick(object sender, RoutedEventArgs e)
-        {
-            var p = (NavigationWindow)this.Parent;
-            p.Navigate(new Pages.PreviousReportPage());
         }
     }
 }

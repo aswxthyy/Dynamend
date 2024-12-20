@@ -7,7 +7,7 @@
     <Style x:Key="Rbutton" TargetType="RadioButton">
         <Setter Property="Margin" Value="10"></Setter>
         <Setter Property="Padding" Value="5"></Setter>
-        <Setter Property="FontSize" Value="{StaticResource FontMd}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSm}"></Setter>
         <Setter Property="FontWeight" Value="ExtraLight"></Setter>
         <Setter Property="FontFamily" Value="Cascadia Mono"></Setter>
         <Setter Property="Foreground" Value="#F6FCDF"></Setter>

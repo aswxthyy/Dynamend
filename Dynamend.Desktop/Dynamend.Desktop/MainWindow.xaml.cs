@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dynamend.Desktop.Windows;
 
 namespace Dynamend.Desktop
 {
@@ -20,9 +21,20 @@ namespace Dynamend.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Frame  MainFrameInstances { get; private set; }
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_SearchClick(object sender, RoutedEventArgs e)
+        {
+            new PreviousReportWindow(TxtSearchLicense.Text).Show();
+        }
+
+        private void Button_AddUserClick(object sender, RoutedEventArgs e)
+        {
+            new NewCustomer().Show();
         }
     }
 }

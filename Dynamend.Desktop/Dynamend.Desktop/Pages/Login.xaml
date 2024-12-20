@@ -62,7 +62,7 @@
                      Text="{Binding License, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <Button Content="LOGIN" Style="{StaticResource ButtonBase}" Margin="10,30,10,20"
+            <Button Click="Button_LoginClick" Content="LOGIN" Style="{StaticResource ButtonBase}" Margin="10,30,10,20"
                     />
             <TextBlock Text="New Customer?" Style="{StaticResource H3}" HorizontalAlignment="Center" TextDecorations="Underline"/>
         </StackPanel>

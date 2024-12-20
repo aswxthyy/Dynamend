@@ -16,19 +16,19 @@ using System.Windows.Shapes;
 namespace Dynamend.Desktop.Pages
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for PreviousReportPage.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class PreviousReportPage : Page
     {
-        public Login()
+        public PreviousReportPage()
         {
             InitializeComponent();
         }
 
-        private void Button_LoginClick(object sender, RoutedEventArgs e)
+        private void BtnNewReport_Click(object sender, RoutedEventArgs e)
         {
             var p = (NavigationWindow)this.Parent;
-            p.Navigate(new Pages.PreviousReportPage());
+            p.Navigate(new Pages.NewReport());
         }
     }
 }
